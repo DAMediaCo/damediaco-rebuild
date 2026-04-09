@@ -222,28 +222,28 @@ export const reviewHighlights = [
   {
     name: 'Hassan Abid',
     date: 'May 10, 2024',
-    source: 'Google review',
+    source: '5-star Google review',
     quote:
       'Relaxing atmosphere, welcoming service, and thoughtful guidance through the menu from Joy.',
   },
   {
     name: 'Hugo Alvarado',
     date: 'April 15, 2024',
-    source: 'Google review',
+    source: '5-star Google review',
     quote:
       'A cool little spot with great atmosphere and staff that made the stop feel easy and friendly.',
   },
   {
     name: 'Joseph Rudowicz',
     date: 'October 21, 2024',
-    source: 'Google review',
+    source: '5-star Google review',
     quote:
       'Uber chill vibes, strong products, and deals that make it a solid late-night stop.',
   },
   {
     name: 'Ketia Show',
     date: 'September 11, 2024',
-    source: 'Google review',
+    source: '5-star Google review',
     quote:
       'Professional staff, easy conversation, and the kind of place that makes you want to stay awhile.',
   },
