@@ -45,6 +45,7 @@ const organizationSchema = {
   name: business.name,
   url: absoluteSiteUrl,
   logo: new URL('/chillers/logo.png', Astro.site).toString(),
+  foundingDate: business.foundingDate,
   sameAs: [business.instagram, business.facebook, business.linktree],
 };
 const localBusinessSchema = {
@@ -61,6 +62,7 @@ const localBusinessSchema = {
   url: absoluteSiteUrl,
   telephone: business.phone,
   priceRange: business.priceRange,
+  foundingDate: business.foundingDate,
   menu: absoluteMenuUrl,
   hasMap: business.googleMapsUrl,
   currenciesAccepted: 'USD',

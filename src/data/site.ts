@@ -4,6 +4,8 @@ export const business = {
   description:
     'Late-night kava bar and coffee shop in Pompano Beach serving kava, elixirs, coffee, canned seltzers, and specialty drinks.',
   tagline: 'Late-night kava, elixirs, and coffee in Pompano Beach.',
+  openedSince: 'September 2021',
+  foundingDate: '2021-09',
   addressLine1: '230 S Cypress Rd suite b',
   addressLine2: 'Pompano Beach, FL 33060',
   fullAddress: '230 S Cypress Rd suite b, Pompano Beach, FL 33060',
@@ -65,6 +67,7 @@ export const homeHighlights = [
 ];
 
 export const heroStatements = [
+  'Open since September 2021',
   'Verified Google business details',
   'Real March 2026 menu',
   'Late-night hours in Pompano Beach',
@@ -103,7 +106,7 @@ export const heroLedger = [
 ];
 
 export const localStory = {
-  title: 'A Pompano Beach kava bar and coffee shop with current hours, real pricing, and direct map links.',
+  title: 'A Pompano Beach kava bar and coffee shop open since September 2021, with current hours, real pricing, and direct map links.',
   body:
     'If someone is searching for a kava bar in Pompano Beach, a coffee shop on South Cypress Road, or a late-night place near downtown Pompano Beach that stays open until 1 AM, this site now answers those questions directly with verified location details and the real menu.',
 };
@@ -144,9 +147,9 @@ export const localProofStrip = [
 export const homeBentoCards = [
   {
     eyebrow: 'Where to find it',
-    title: 'South Cypress Road in Pompano Beach.',
+    title: 'South Cypress Road in Pompano Beach, open since September 2021.',
     body:
-      'The site now keeps the exact address, phone number, and late-night hours aligned with the live business listing.',
+      'The site now keeps the exact address, phone number, opening history, and late-night hours aligned with the live business listing.',
   },
   {
     eyebrow: 'What to order',
