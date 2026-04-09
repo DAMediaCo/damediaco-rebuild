@@ -66,11 +66,8 @@ const structuredData = [
         <div class="glass-panel page-title-panel" data-reveal>
           <Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/visit/', label: 'Visit' }]} />
           <p class="eyebrow">Visit</p>
-          <h1>Visit Chillers with verified hours, directions, and local details.</h1>
-          <p>
-            This page answers the local intent questions first: where it is, when it closes, how to
-            call, and whether the business information is current.
-          </p>
+          <h1>Visit Chillers in Pompano Beach.</h1>
+          <p>Hours, address, phone, and quick links in one place.</p>
 
           <div class="action-row">
             <a class="button-primary" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
@@ -94,7 +91,7 @@ const structuredData = [
             ))}
           </div>
 
-          <p class="page-note">Verified against the Google business listing on {business.verifiedDate}.</p>
+          <p class="page-note">Open since {business.openedSince}.</p>
         </aside>
       </div>
     </section>
@@ -111,7 +108,7 @@ const structuredData = [
 
         <article class="glass-panel bento-card visit-links-card">
           <p class="eyebrow">Direct actions</p>
-          <h3>Maps, phone, and social links in one place.</h3>
+          <h3>Maps, phone, and social links.</h3>
           <div class="link-pill-grid">
             {visitLinks.map((link) => (
               <a
@@ -132,7 +129,7 @@ const structuredData = [
       <div class="container-shell bento-grid visit-detail-grid" data-reveal>
         <article class="glass-panel detail-card hours-card">
           <p class="eyebrow">Hours</p>
-          <h3>Cross-checked against the live listing.</h3>
+          <h3>Open early, stay late.</h3>
           <div class="hours-list">
             {hours.map((entry) => (
               <div class="hours-item">
@@ -145,7 +142,7 @@ const structuredData = [
 
         <article class="glass-panel detail-card access-card">
           <p class="eyebrow">Accessibility</p>
-          <h3>Easy to scan before someone heads over.</h3>
+          <h3>Accessible entrance, parking, restroom, and seating.</h3>
           <div class="pill-row">
             {accessibility.map((item) => (
               <span class="pill">{item}</span>
@@ -155,7 +152,7 @@ const structuredData = [
 
         <article class="glass-panel detail-card faq-card">
           <p class="eyebrow">FAQ</p>
-          <h3>Short answers to the local questions that come up most.</h3>
+          <h3>A few quick answers.</h3>
           <div class="faq-grid">
             {faqs.map((item) => (
               <article class="faq-item">

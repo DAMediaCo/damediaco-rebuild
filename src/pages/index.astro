@@ -47,8 +47,8 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
           <p class="hero-brand">{business.name}</p>
           <h1>{business.tagline}</h1>
           <p class="hero-summary">
-            Verified hours, real menu pricing, and direct directions for a late-night kava bar and
-            coffee shop on South Cypress Road.
+            Open since {business.openedSince} with coffee, kava, elixirs, and late-night hours on
+            South Cypress Road.
           </p>
 
           <div class="hero-pill-row">
@@ -66,7 +66,7 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
             </a>
           </div>
 
-          <p class="hero-note">Business details cross-checked on {business.verifiedDate}.</p>
+          <p class="hero-note">Open since {business.openedSince}.</p>
         </div>
 
         <div class="hero-board glass-panel" data-reveal>
@@ -101,7 +101,7 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
     <section class="section">
       <div class="container-shell section-intro" data-reveal>
         <div>
-          <p class="eyebrow">Local focus</p>
+          <p class="eyebrow">About</p>
           <h2>{localStory.title}</h2>
         </div>
         <p>{localStory.body}</p>
@@ -109,8 +109,8 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
 
       <div class="container-shell bento-grid home-overview-grid" data-reveal>
         <article class="glass-panel bento-card bento-card-feature">
-          <p class="eyebrow">What Google can read here</p>
-          <h3>Local signals, current menu content, and verified business details all line up.</h3>
+          <p class="eyebrow">What to expect</p>
+          <h3>A straightforward look at the bar.</h3>
           <div class="feature-stack">
             {seoPillars.map((item) => (
               <article>
@@ -135,18 +135,17 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
       <div class="container-shell section-intro" data-reveal>
         <div>
           <p class="eyebrow">Menu snapshot</p>
-          <h2>Current pours and pricing, translated into a clean bento layout.</h2>
+          <h2>Kava, elixirs, coffee, specialty drinks, and canned seltzers.</h2>
         </div>
         <p>
-          The homepage points people straight to the live menu while keeping the most useful pricing
-          categories visible without making them zoom into an image first.
+          The full menu is here, plus the main prices broken out below.
         </p>
       </div>
 
       <div class="container-shell bento-grid menu-preview-grid" data-reveal>
         <figure class="glass-panel bento-card menu-preview-poster">
           <img src={business.menuImage} alt="Current Chillers menu" />
-          <figcaption>Current menu image supplied for this rebuild</figcaption>
+          <figcaption>March 2026 menu</figcaption>
         </figure>
 
         {featuredCategories.map((family) => (
@@ -169,12 +168,11 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
     <section class="section">
       <div class="container-shell section-intro" data-reveal>
         <div>
-          <p class="eyebrow">Review themes</p>
-          <h2>Only the public review comments that support the strongest signals.</h2>
+          <p class="eyebrow">Reviews</p>
+          <h2>Recent public reviews mention the staff, vibe, and late hours.</h2>
         </div>
         <p>
-          Positive atmosphere, approachable staff, and a dependable late-night stop keep surfacing
-          in the public Google feedback.
+          A few recent 4-star-and-up Google reviews are included here.
         </p>
       </div>
 
@@ -182,7 +180,7 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
         <article class="glass-panel bento-card review-lead">
           <span class="stat-label">Google rating</span>
           <strong class="mega-stat">{business.rating}</strong>
-          <p>Positive public review excerpts only.</p>
+          <p>Current public listing rating.</p>
         </article>
 
         {reviewHighlights.map((review) => (
@@ -204,7 +202,7 @@ const featuredCategories = menuCategoryCards.slice(0, 4);
           <p class="eyebrow">Plan the stop</p>
           <h2>{business.fullAddress}</h2>
           <p>
-            Open late in Pompano Beach with wheelchair accessible entrance, parking, restroom, and
+            Open since {business.openedSince} with accessible entrance, parking, restroom, and
             seating.
           </p>
         </div>

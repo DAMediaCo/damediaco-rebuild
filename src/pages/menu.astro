@@ -54,10 +54,9 @@ const structuredData = [
         <div class="glass-panel page-title-panel" data-reveal>
           <Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/menu/', label: 'Menu' }]} />
           <p class="eyebrow">Menu</p>
-          <h1>The current Chillers menu in Pompano Beach.</h1>
+          <h1>The current Chillers menu.</h1>
           <p>
-            Real March 2026 pricing laid out for fast scanning on desktop and mobile, with the full
-            poster still available when someone wants the original image.
+            March 2026 prices for coffee, kava, elixirs, specialty drinks, boosts, and snacks.
           </p>
 
           <div class="action-row">
@@ -71,7 +70,7 @@ const structuredData = [
         </div>
 
         <aside class="glass-panel page-side-panel" data-reveal>
-          <p class="eyebrow">Most searched prices</p>
+          <p class="eyebrow">Quick look</p>
 
           <div class="stat-list">
             {menuSearchHighlights.map((item) => (
@@ -88,8 +87,8 @@ const structuredData = [
               <strong>{business.addressLine1}</strong>
             </div>
             <div>
-              <span>Verified</span>
-              <strong>{business.verifiedDate}</strong>
+              <span>Open since</span>
+              <strong>{business.openedSince}</strong>
             </div>
           </div>
         </aside>
@@ -100,7 +99,7 @@ const structuredData = [
       <div class="container-shell bento-grid menu-page-grid" data-reveal>
         <figure class="glass-panel bento-card menu-page-poster">
           <img src={business.menuImage} alt="March 2026 Chillers Kava and Coffee menu" />
-          <figcaption>Full March 2026 menu poster</figcaption>
+          <figcaption>March 2026 menu poster</figcaption>
         </figure>
 
         {menuCategoryCards.map((family) => (
@@ -123,12 +122,11 @@ const structuredData = [
     <section class="section">
       <div class="container-shell section-intro" data-reveal>
         <div>
-          <p class="eyebrow">Menu detail</p>
-          <h2>Kava, coffee, boosts, and snacks broken into web-readable groups.</h2>
+          <p class="eyebrow">More from the board</p>
+          <h2>Coffee, kava, boosts, and snacks.</h2>
         </div>
         <p>
-          This page keeps the full poster, but it also turns the board into crawlable text for
-          people searching current prices or specific drink categories in Pompano Beach.
+          The main sections are broken out below for easier reading.
         </p>
       </div>
 
