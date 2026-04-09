@@ -22,7 +22,6 @@ export const business = {
   rating: '4.8',
   priceRange: '$$',
   verifiedDate: 'April 8, 2026',
-  menuSource: 'March 2026 menu image provided for this rebuild',
   latitude: 26.2290363,
   longitude: -80.1227874,
 };
@@ -68,9 +67,8 @@ export const homeHighlights = [
 
 export const heroStatements = [
   'Open since September 2021',
-  'Verified Google business details',
-  'Real March 2026 menu',
-  'Late-night hours in Pompano Beach',
+  'Coffee, kava, and elixirs',
+  'Open until 1 AM daily',
 ];
 
 export const tickerItems = [
@@ -106,26 +104,26 @@ export const heroLedger = [
 ];
 
 export const localStory = {
-  title: 'A Pompano Beach kava bar and coffee shop open since September 2021, with current hours, real pricing, and direct map links.',
+  title: 'Coffee early, kava late, and a laid-back stop in Pompano Beach.',
   body:
-    'If someone is searching for a kava bar in Pompano Beach, a coffee shop on South Cypress Road, or a late-night place near downtown Pompano Beach that stays open until 1 AM, this site now answers those questions directly with verified location details and the real menu.',
+    'Chillers has been open since September 2021, serving coffee, kava, elixirs, specialty drinks, and snacks on South Cypress Road.',
 };
 
 export const seoPillars = [
   {
-    title: 'Exact local details',
+    title: 'Since September 2021',
     body:
-      'The address, phone number, hours, and accessibility details match the live Google business listing so the site reinforces the same local signals across every page.',
+      'Chillers has been serving Pompano Beach since September 2021.',
   },
   {
-    title: 'Current menu content',
+    title: 'Coffee, kava, and more',
     body:
-      'The menu page translates the March 2026 poster into readable web copy, which gives Google and customers indexable pricing, drink categories, and update context.',
+      'The menu covers coffee, kava, elixirs, specialty drinks, canned seltzers, boosts, and snacks.',
   },
   {
-    title: 'Positive public review themes',
+    title: 'Open late',
     body:
-      'The homepage keeps the strongest public Google review themes visible: staff guidance, relaxed atmosphere, and a dependable late-night stop in Pompano Beach.',
+      'Open at 7:00 AM Monday through Saturday, 9:00 AM on Sunday, and open until 1:00 AM every day.',
   },
 ];
 
@@ -147,21 +145,21 @@ export const localProofStrip = [
 export const homeBentoCards = [
   {
     eyebrow: 'Where to find it',
-    title: 'South Cypress Road in Pompano Beach, open since September 2021.',
+    title: '230 S Cypress Rd suite b in Pompano Beach.',
     body:
-      'The site now keeps the exact address, phone number, opening history, and late-night hours aligned with the live business listing.',
+      'Easy to find, easy to call, and open late every day.',
   },
   {
     eyebrow: 'What to order',
-    title: 'Kava, elixirs, coffee, and specialty drinks.',
+    title: 'Kava, elixirs, coffee, specialty drinks, and canned seltzers.',
     body:
-      'The menu page turns the real March 2026 poster into readable web content, so local menu searches can land on actual prices instead of a blurry image.',
+      'The menu page breaks out the main prices and still keeps the full poster available.',
   },
   {
     eyebrow: 'Why people come back',
-    title: 'Relaxed service, easy vibes, dependable late-night stop.',
+    title: 'Friendly staff, relaxed atmosphere, and late-night hours.',
     body:
-      'Public Google review excerpts keep repeating the same story: helpful staff, a welcoming room, and a menu that feels approachable for first-timers.',
+      'That is the pattern that keeps showing up in the recent public reviews.',
   },
 ];
 
@@ -185,7 +183,7 @@ export const visitBentoCards = [
     eyebrow: 'Address',
     title: '230 S Cypress Rd suite b',
     body:
-      'Pompano Beach, FL 33060. This stays visible and consistent across the site to reinforce local search relevance.',
+      'Pompano Beach, FL 33060.',
   },
   {
     eyebrow: 'Hours',
@@ -197,7 +195,7 @@ export const visitBentoCards = [
     eyebrow: 'Accessibility',
     title: 'Entry, parking, restroom, and seating are all listed as accessible.',
     body:
-      'Those attributes were pulled from the Google business listing and surfaced clearly for customers planning their visit.',
+      'Wheelchair accessible entrance, parking lot, restroom, and seating.',
   },
 ];
 
@@ -224,28 +222,28 @@ export const reviewHighlights = [
   {
     name: 'Hassan Abid',
     date: 'May 10, 2024',
-    source: 'Public Google review excerpt',
+    source: 'Google review',
     quote:
       'Relaxing atmosphere, welcoming service, and thoughtful guidance through the menu from Joy.',
   },
   {
     name: 'Hugo Alvarado',
     date: 'April 15, 2024',
-    source: 'Public Google review excerpt',
+    source: 'Google review',
     quote:
       'A cool little spot with great atmosphere and staff that made the stop feel easy and friendly.',
   },
   {
     name: 'Joseph Rudowicz',
     date: 'October 21, 2024',
-    source: 'Public Google review excerpt',
+    source: 'Google review',
     quote:
       'Uber chill vibes, strong products, and deals that make it a solid late-night stop.',
   },
   {
     name: 'Ketia Show',
     date: 'September 11, 2024',
-    source: 'Public Google review excerpt',
+    source: 'Google review',
     quote:
       'Professional staff, easy conversation, and the kind of place that makes you want to stay awhile.',
   },
@@ -464,8 +462,8 @@ export const faqs = [
       'The March 2026 menu includes elixirs, kava, hot and iced coffee, espresso, latte, cappuccino, frappes, specialty drinks, canned seltzers, boosts, and snacks.',
   },
   {
-    question: 'How was this page verified?',
+    question: 'When did Chillers open?',
     answer:
-      'Hours, address, phone, and accessibility were cross-checked against the Google business listing. Menu details came from the March 2026 menu image supplied for this rebuild.',
+      'Chillers has been open since September 2021.',
   },
 ];
