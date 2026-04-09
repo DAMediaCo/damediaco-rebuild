@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'static',
-  site: 'https://damediaco.com',
+  site: 'https://chillerskavacoffee.com',
   build: {
     format: 'directory'
   }

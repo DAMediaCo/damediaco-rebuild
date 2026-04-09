@@ -1,86 +1,187 @@
 ---
 import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { accessibility, business, hours } from '../data/site';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  structuredData?: Record<string, any> | Array<Record<string, any>>;
 }
 
-const { 
-  title = "David Miller | DAMediaCo - Full Stack Developer",
-  description = "20+ years building amazing websites, apps, and digital experiences. Professional web development services for businesses worldwide."
+const {
+  title = `${business.name} | Pompano Beach Kava and Coffee Bar`,
+  description = business.description,
+  image = '/chillers/google-photo.jpg',
+  structuredData = [],
 } = Astro.props;
+
+const schemaDayMap: Record<string, string> = {
+  Monday: 'https://schema.org/Monday',
+  Tuesday: 'https://schema.org/Tuesday',
+  Wednesday: 'https://schema.org/Wednesday',
+  Thursday: 'https://schema.org/Thursday',
+  Friday: 'https://schema.org/Friday',
+  Saturday: 'https://schema.org/Saturday',
+  Sunday: 'https://schema.org/Sunday',
+};
+
+const absoluteImage = new URL(image, Astro.site).toString();
+const absoluteMenuUrl = new URL(business.menuUrl, Astro.site).toString();
+const absoluteSiteUrl = new URL('/', Astro.site).toString();
+const normalizedStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: business.name,
+  url: absoluteSiteUrl,
+  inLanguage: 'en-US',
+};
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: business.name,
+  url: absoluteSiteUrl,
+  logo: new URL('/chillers/logo.png', Astro.site).toString(),
+  sameAs: [business.instagram, business.facebook, business.linktree],
+};
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  '@id': `${absoluteSiteUrl}#business`,
+  name: business.name,
+  description,
+  image: [
+    absoluteImage,
+    new URL('/chillers/google-photo.jpg', Astro.site).toString(),
+    new URL('/chillers/menu-march-2026.png', Astro.site).toString(),
+  ],
+  url: absoluteSiteUrl,
+  telephone: business.phone,
+  priceRange: business.priceRange,
+  menu: absoluteMenuUrl,
+  hasMap: business.googleMapsUrl,
+  currenciesAccepted: 'USD',
+  mainEntityOfPage: Astro.url.href,
+  areaServed: {
+    '@type': 'City',
+    name: 'Pompano Beach',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: business.latitude,
+    longitude: business.longitude,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: business.addressLine1,
+    addressLocality: 'Pompano Beach',
+    addressRegion: 'FL',
+    postalCode: '33060',
+    addressCountry: 'US',
+  },
+  sameAs: [business.instagram, business.facebook, business.linktree],
+  amenityFeature: accessibility.map((item) => ({
+    '@type': 'LocationFeatureSpecification',
+    name: item,
+    value: true,
+  })),
+  openingHoursSpecification: hours.map((entry) => {
+    const opens = entry.day === 'Sunday' ? '09:00' : '07:00';
+    return {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: schemaDayMap[entry.day],
+      opens,
+      closes: '01:00',
+    };
+  }),
+};
+const schemaNodes = [websiteSchema, organizationSchema, localBusinessSchema, ...normalizedStructuredData];
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en-US" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="author" content="David Miller" />
-  <meta name="theme-color" content="#0f172a" />
-  
-  <!-- Open Graph -->
+  <meta name="author" content={business.name} />
+  <meta name="theme-color" content="#0b1720" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="geo.region" content="US-FL" />
+  <meta name="geo.placename" content="Pompano Beach" />
+  <meta name="geo.position" content={`${business.latitude};${business.longitude}`} />
+  <meta name="ICBM" content={`${business.latitude}, ${business.longitude}`} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://damediaco.com" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ7FCMT8ER"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QJ7FCMT8ER');
-  </script>
-  
+  <meta property="og:url" content={Astro.url.href} />
+  <meta property="og:image" content={absoluteImage} />
+  <meta property="og:site_name" content={business.name} />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={absoluteImage} />
+  <link rel="canonical" href={Astro.url.href} />
+  <link rel="icon" type="image/png" href="/chillers/logo.png" />
+  <link rel="preload" as="image" href={image} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <script type="application/ld+json" set:html={JSON.stringify(schemaNodes)}></script>
   <slot name="head" />
 </head>
-<body class="bg-slate-900 text-slate-100 antialiased selection:bg-teal-500/30 selection:text-teal-100 overflow-x-hidden">
-  <div class="relative min-h-screen">
-    <!-- Background gradient mesh -->
-    <div class="fixed inset-0 pointer-events-none z-0">
-      <div class="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-slate-800/50 rounded-full blur-3xl"></div>
-    </div>
-    
-    <slot />
-  </div>
-  
-  <!-- Scroll to top on page load/refresh -->
+<body>
+  <div class="site-bg" aria-hidden="true"></div>
+  <Header />
+  <slot />
+  <Footer />
   <script>
-    if (history.scrollRestoration) {
-      history.scrollRestoration = 'manual';
+    const initSiteChrome = () => {
+      const body = document.body;
+      const toggle = document.querySelector('[data-nav-toggle]');
+      const closeButtons = document.querySelectorAll('[data-nav-close]');
+      const revealTargets = document.querySelectorAll('[data-reveal]');
+
+      const closeNav = () => {
+        body.dataset.navOpen = 'false';
+      };
+
+      toggle?.addEventListener('click', () => {
+        body.dataset.navOpen = body.dataset.navOpen === 'true' ? 'false' : 'true';
+      });
+
+      closeButtons.forEach((button) => {
+        button.addEventListener('click', closeNav);
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      revealTargets.forEach((node) => observer.observe(node));
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSiteChrome, { once: true });
+    } else {
+      initSiteChrome();
     }
-    window.addEventListener('beforeunload', () => {
-      window.scrollTo(0, 0);
-    });
-    window.scrollTo(0, 0);
-  </script>
-  
-  <!-- Tawk.to Chat -->
-  <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-      s1.async=true;
-      s1.src='https://embed.tawk.to/675c5e8caf5bfec1dbe08139/1if2s7d1d';
-      s1.charset='UTF-8';
-      s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1,s0);
-    })();
   </script>
 </body>
 </html>

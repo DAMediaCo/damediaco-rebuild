@@ -1,97 +1,67 @@
 ---
-import { Code2, Menu, X } from 'lucide-react';
+import { business, navLinks } from '../data/site';
 
-const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
-const base = isHome ? '' : '/';
-const navLinks = [
-  { href: `${base}#services`, label: 'Services' },
-  { href: `${base}#work`, label: 'Work' },
-  { href: `${base}#philosophy`, label: 'Philosophy' },
-  { href: `${base}#testimonials`, label: 'Testimonials' },
-  { href: `${base}#faq`, label: 'FAQ' },
-  { href: `${base}#contact`, label: 'Contact' },
-];
+const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 glass-strong border-b border-white/5">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <nav class="flex items-center justify-between h-16 lg:h-20">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 group">
-        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-teal-500/20 transition-all duration-300">
-          <Code2 className="w-5 h-5 text-white" />
-          <div class="absolute inset-0 bg-gradient-to-tr from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        </div>
-        <div class="flex flex-col">
-          <span class="text-lg font-bold font-display tracking-tight">David Miller</span>
-          <span class="text-xs text-slate-400 -mt-1">DAMediaCo</span>
-        </div>
-      </a>
-      
-      <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center gap-8">
-        {navLinks.map(link => (
-          <a 
-            href={link.href} 
-            class="text-sm font-medium text-slate-300 hover:text-teal-400 hover-underline transition-colors"
-          >
+<header class="site-header">
+  <div class="container-shell header-bar">
+    <a class="brand-mark" href="/">
+      <img src="/chillers/logo.png" alt={`${business.name} logo`} width="64" height="64" />
+      <span>
+        <strong>{business.shortName}</strong>
+        <em>Pompano Beach, FL</em>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary">
+      {
+        navLinks.map((link) => (
+          <a class={currentPath === link.href ? 'is-active' : ''} href={link.href}>
             {link.label}
           </a>
-        ))}
-      </div>
-      
-      <!-- CTA -->
-      <div class="hidden lg:flex items-center gap-4">
-        <a href={`${base}#contact`} class="btn-primary text-sm py-2.5 px-5">
-          Let's Talk
-        </a>
-      </div>
-      
-      <!-- Mobile Menu Button -->
-      <button 
-        id="menu-toggle"
-        class="lg:hidden p-2 text-slate-300 hover:text-white"
-        aria-label="Toggle menu"
-      >
-        <Menu id="menu-open" className="w-6 h-6" />
-        <X id="menu-close" className="w-6 h-6 hidden" />
-      </button>
+        ))
+      }
     </nav>
+
+    <div class="header-actions">
+      <a class="button-secondary header-cta" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+        Directions
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open navigation">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </div>
-  
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="lg:hidden hidden glass-strong border-t border-white/5">
-    <div class="px-6 py-4 space-y-3">
-      {navLinks.map(link => (
-        <a 
-          href={link.href} 
-          class="block py-2 text-slate-300 hover:text-teal-400 transition-colors font-medium"
-        >
-          {link.label}
+
+  <div class="mobile-panel" aria-label="Mobile navigation">
+    <div class="mobile-panel-inner">
+      <div class="mobile-panel-top">
+        <span class="eyebrow">Navigate</span>
+        <button class="mobile-close" type="button" data-nav-close aria-label="Close navigation">
+          Close
+        </button>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Mobile primary">
+        {
+          navLinks.map((link) => (
+            <a class={currentPath === link.href ? 'is-active' : ''} href={link.href} data-nav-close>
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="mobile-links">
+        <a class="button-primary" href={business.menuUrl} target="_blank" rel="noreferrer">
+          Full Menu
         </a>
-      ))}
+        <a class="button-secondary" href={business.phoneHref}>
+          Call {business.phone}
+        </a>
+      </div>
     </div>
   </div>
 </header>
-
-<script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuOpen = document.getElementById('menu-open');
-  const menuClose = document.getElementById('menu-close');
-  
-  menuToggle?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-    menuOpen?.classList.toggle('hidden');
-    menuClose?.classList.toggle('hidden');
-  });
-  
-  // Close menu on link click
-  mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      menuOpen?.classList.remove('hidden');
-      menuClose?.classList.add('hidden');
-    });
-  });
-</script>

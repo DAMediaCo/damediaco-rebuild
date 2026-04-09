@@ -1,0 +1,190 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Layout from '../layouts/Layout.astro';
+import {
+  boostersMenu,
+  business,
+  coffeeMenu,
+  kavaAndElixirMenu,
+  menuSearchHighlights,
+  menuCategoryCards,
+  snacksMenu,
+} from '../data/site';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://chillerskavacoffee.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Menu',
+        item: 'https://chillerskavacoffee.com/menu/',
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `Menu | ${business.name}`,
+    url: 'https://chillerskavacoffee.com/menu/',
+    description:
+      'March 2026 menu for Chillers Kava and Coffee in Pompano Beach, Florida.',
+    primaryImageOfPage: `https://chillerskavacoffee.com${business.menuImage}`,
+  },
+];
+---
+
+<Layout
+  title={`Menu | ${business.name} in Pompano Beach, FL`}
+  description="March 2026 menu for Chillers Kava and Coffee in Pompano Beach, FL with kava, elixirs, coffee, canned seltzers, specialty drinks, boosts, and snacks."
+  image={business.menuImage}
+  structuredData={structuredData}
+>
+  <main class="site-main page-main">
+    <section class="page-shell">
+      <div class="container-shell page-top">
+        <div class="glass-panel page-title-panel" data-reveal>
+          <Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/menu/', label: 'Menu' }]} />
+          <p class="eyebrow">Menu</p>
+          <h1>The current Chillers menu in Pompano Beach.</h1>
+          <p>
+            Real March 2026 pricing laid out for fast scanning on desktop and mobile, with the full
+            poster still available when someone wants the original image.
+          </p>
+
+          <div class="action-row">
+            <a class="button-primary" href={business.menuUrl} target="_blank" rel="noreferrer">
+              Open Full Menu
+            </a>
+            <a class="button-secondary" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+              Directions
+            </a>
+          </div>
+        </div>
+
+        <aside class="glass-panel page-side-panel" data-reveal>
+          <p class="eyebrow">Most searched prices</p>
+
+          <div class="stat-list">
+            {menuSearchHighlights.map((item) => (
+              <div>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+
+          <div class="compact-meta">
+            <div>
+              <span>Location</span>
+              <strong>{business.addressLine1}</strong>
+            </div>
+            <div>
+              <span>Verified</span>
+              <strong>{business.verifiedDate}</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container-shell bento-grid menu-page-grid" data-reveal>
+        <figure class="glass-panel bento-card menu-page-poster">
+          <img src={business.menuImage} alt="March 2026 Chillers Kava and Coffee menu" />
+          <figcaption>Full March 2026 menu poster</figcaption>
+        </figure>
+
+        {menuCategoryCards.map((family) => (
+          <article class="glass-panel bento-card menu-family-card">
+            <p class="eyebrow">{family.subtitle}</p>
+            <h3>{family.title}</h3>
+            <ul class="category-list">
+              {family.items.map((item) => (
+                <li>
+                  <span>{item.name}</span>
+                  <strong>{item.notes}</strong>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-shell section-intro" data-reveal>
+        <div>
+          <p class="eyebrow">Menu detail</p>
+          <h2>Kava, coffee, boosts, and snacks broken into web-readable groups.</h2>
+        </div>
+        <p>
+          This page keeps the full poster, but it also turns the board into crawlable text for
+          people searching current prices or specific drink categories in Pompano Beach.
+        </p>
+      </div>
+
+      <div class="container-shell bento-grid detail-grid" data-reveal>
+        <article class="glass-panel detail-card">
+          <p class="eyebrow">Kava and elixirs</p>
+          <ul class="detail-list">
+            {kavaAndElixirMenu.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                <span>{item.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article class="glass-panel detail-card">
+          <p class="eyebrow">Coffee</p>
+          <ul class="detail-list">
+            {coffeeMenu.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                <span>{item.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article class="glass-panel detail-card">
+          <p class="eyebrow">Boosters</p>
+          <ul class="detail-list">
+            {boostersMenu.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                <span>{item.detail}</span>
+              </li>
+            ))}
+            <li>
+              <strong>Bula Buster</strong>
+              <span>Single $4.75 or double $9.00 added to any drink.</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="glass-panel detail-card">
+          <p class="eyebrow">Snacks</p>
+          <ul class="detail-list">
+            {snacksMenu.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                <span>{item.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>

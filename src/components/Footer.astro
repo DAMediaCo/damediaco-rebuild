@@ -1,38 +1,76 @@
 ---
-import { Heart } from 'lucide-react';
+import { business, navLinks } from '../data/site';
 ---
 
-<footer class="border-t border-white/5 py-12">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-8 mb-8">
-      <!-- Brand -->
-      <div>
-        <h3 class="text-xl font-bold font-display text-gradient mb-3">DAMediaCo</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">
-          Building exceptional digital experiences for 20+ years.
-        </p>
-      </div>
-      
-      <!-- Quick Links -->
-      <div>
-        <h4 class="text-white font-semibold mb-3">Quick Links</h4>
-        <ul class="space-y-2">
-          <li><a href="#services" class="text-slate-400 hover:text-teal-400 text-sm transition">Services</a></li>
-          <li><a href="#work" class="text-slate-400 hover:text-teal-400 text-sm transition">Work</a></li>
-          <li><a href="#testimonials" class="text-slate-400 hover:text-teal-400 text-sm transition">Testimonials</a></li>
-          <li><a href="#faq" class="text-slate-400 hover:text-teal-400 text-sm transition">FAQ</a></li>
-          <li><a href="#contact" class="text-slate-400 hover:text-teal-400 text-sm transition">Contact</a></li>
-        </ul>
+<footer class="site-footer">
+  <div class="container-shell footer-grid">
+    <div>
+      <p class="eyebrow">Chillers Kava and Coffee</p>
+      <h2>Verified local details, real menu pricing, and direct routes to the bar.</h2>
+      <p class="footer-note">
+        Address, phone, hours, and accessibility were cross-checked against the Google business
+        listing on {business.verifiedDate}. Menu content reflects the {business.menuSource}.
+      </p>
+      <div class="action-row footer-actions">
+        <a class="button-primary" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+          Directions
+        </a>
+        <a class="button-secondary" href={business.phoneHref}>
+          Call {business.phone}
+        </a>
       </div>
     </div>
-    
-    <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-slate-500 text-sm">
-        © {new Date().getFullYear()} DAMediaCo. All rights reserved.
-      </p>
-      <p class="text-slate-500 text-sm flex items-center gap-1">
-        Built with <Heart className="w-4 h-4 text-red-500 fill-red-500" /> by David Miller
-      </p>
+
+    <div class="footer-links">
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          {
+            navLinks.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3>Visit</h3>
+        <ul>
+          <li>{business.addressLine1}</li>
+          <li>{business.addressLine2}</li>
+          <li>
+            <a href={business.phoneHref}>{business.phone}</a>
+          </li>
+          <li>
+            <a href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+              Open in Google Maps
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Social</h3>
+        <ul>
+          <li>
+            <a href={business.instagram} target="_blank" rel="noreferrer">
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href={business.facebook} target="_blank" rel="noreferrer">
+              Facebook
+            </a>
+          </li>
+          <li>
+            <a href={business.linktree} target="_blank" rel="noreferrer">
+              Linktree
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </footer>

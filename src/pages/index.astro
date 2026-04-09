@@ -1,26 +1,246 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HeroSection from '../components/sections/HeroSection.astro';
-import StatsSection from '../components/sections/StatsSection.astro';
-import ServicesSection from '../components/sections/ServicesSection.astro';
-import WorkSection from '../components/sections/WorkSection.astro';
-import PhilosophySection from '../components/sections/PhilosophySection.astro';
-import TestimonialsSection from '../components/sections/TestimonialsSection.astro';
-import FAQSection from '../components/sections/FAQSection.astro';
-import ContactSection from '../components/sections/ContactSection.astro';
-import Footer from '../components/Footer.astro';
+import {
+  accessibility,
+  business,
+  heroQuickFacts,
+  heroStatements,
+  homeBentoCards,
+  localProofStrip,
+  localStory,
+  menuCategoryCards,
+  reviewHighlights,
+  seoPillars,
+} from '../data/site';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${business.name} | Kava Bar and Coffee Shop in Pompano Beach, FL`,
+    url: 'https://chillerskavacoffee.com/',
+    description:
+      'Pompano Beach kava bar and coffee shop with verified hours, direct Google Maps details, positive public review highlights, and the current menu.',
+    primaryImageOfPage: 'https://chillerskavacoffee.com/chillers/google-photo.jpg',
+  },
+];
+
+const featuredCategories = menuCategoryCards.slice(0, 4);
 ---
 
-<Layout>
-  <main>
-    <HeroSection />
-    <StatsSection />
-    <ServicesSection />
-    <WorkSection />
-    <PhilosophySection />
-    <TestimonialsSection />
-    <FAQSection />
-    <ContactSection />
+<Layout
+  title={`${business.name} | Kava Bar and Coffee Shop in Pompano Beach, FL`}
+  description="Pompano Beach kava bar and coffee shop with real menu pricing, verified hours, Google review highlights, and direct directions to 230 S Cypress Rd suite b."
+  image="/chillers/google-photo.jpg"
+  structuredData={structuredData}
+>
+  <main class="site-main">
+    <section class="hero-shell">
+      <div class="hero-photo" aria-hidden="true">
+        <img src="/chillers/google-photo.jpg" alt="" />
+      </div>
+      <div class="hero-wash" aria-hidden="true"></div>
+
+      <div class="container-shell hero-layout">
+        <div class="hero-content" data-reveal>
+          <p class="hero-kicker">Pompano Beach, Florida</p>
+          <p class="hero-brand">{business.name}</p>
+          <h1>{business.tagline}</h1>
+          <p class="hero-summary">
+            Verified hours, real menu pricing, and direct directions for a late-night kava bar and
+            coffee shop on South Cypress Road.
+          </p>
+
+          <div class="hero-pill-row">
+            {heroStatements.map((item) => (
+              <span class="hero-pill">{item}</span>
+            ))}
+          </div>
+
+          <div class="action-row">
+            <a class="button-primary" href="/menu/">
+              View Menu
+            </a>
+            <a class="button-secondary" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+              Get Directions
+            </a>
+          </div>
+
+          <p class="hero-note">Business details cross-checked on {business.verifiedDate}.</p>
+        </div>
+
+        <div class="hero-board glass-panel" data-reveal>
+          <div class="hero-board-metrics">
+            {localProofStrip.map((item) => (
+              <div class="hero-board-stat">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+
+          <div class="hero-board-body">
+            <figure class="hero-menu-frame">
+              <img src={business.menuImage} alt="March 2026 menu poster for Chillers Kava and Coffee" />
+              <figcaption>March 2026 menu poster</figcaption>
+            </figure>
+
+            <div class="hero-price-grid">
+              {heroQuickFacts.map((fact) => (
+                <div class="quick-price">
+                  <span>{fact.label}</span>
+                  <strong>{fact.value}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-shell section-intro" data-reveal>
+        <div>
+          <p class="eyebrow">Local focus</p>
+          <h2>{localStory.title}</h2>
+        </div>
+        <p>{localStory.body}</p>
+      </div>
+
+      <div class="container-shell bento-grid home-overview-grid" data-reveal>
+        <article class="glass-panel bento-card bento-card-feature">
+          <p class="eyebrow">What Google can read here</p>
+          <h3>Local signals, current menu content, and verified business details all line up.</h3>
+          <div class="feature-stack">
+            {seoPillars.map((item) => (
+              <article>
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </article>
+
+        {homeBentoCards.map((card) => (
+          <article class="glass-panel bento-card">
+            <p class="eyebrow">{card.eyebrow}</p>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container-shell section-intro" data-reveal>
+        <div>
+          <p class="eyebrow">Menu snapshot</p>
+          <h2>Current pours and pricing, translated into a clean bento layout.</h2>
+        </div>
+        <p>
+          The homepage points people straight to the live menu while keeping the most useful pricing
+          categories visible without making them zoom into an image first.
+        </p>
+      </div>
+
+      <div class="container-shell bento-grid menu-preview-grid" data-reveal>
+        <figure class="glass-panel bento-card menu-preview-poster">
+          <img src={business.menuImage} alt="Current Chillers menu" />
+          <figcaption>Current menu image supplied for this rebuild</figcaption>
+        </figure>
+
+        {featuredCategories.map((family) => (
+          <article class="glass-panel bento-card menu-category-card">
+            <p class="eyebrow">{family.subtitle}</p>
+            <h3>{family.title}</h3>
+            <ul class="category-list">
+              {family.items.map((item) => (
+                <li>
+                  <span>{item.name}</span>
+                  <strong>{item.notes}</strong>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-shell section-intro" data-reveal>
+        <div>
+          <p class="eyebrow">Review themes</p>
+          <h2>Only the public review comments that support the strongest signals.</h2>
+        </div>
+        <p>
+          Positive atmosphere, approachable staff, and a dependable late-night stop keep surfacing
+          in the public Google feedback.
+        </p>
+      </div>
+
+      <div class="container-shell bento-grid reviews-grid" data-reveal>
+        <article class="glass-panel bento-card review-lead">
+          <span class="stat-label">Google rating</span>
+          <strong class="mega-stat">{business.rating}</strong>
+          <p>Positive public review excerpts only.</p>
+        </article>
+
+        {reviewHighlights.map((review) => (
+          <article class="glass-panel bento-card review-card">
+            <div class="review-meta">
+              <span>{review.source}</span>
+              <span>{review.date}</span>
+            </div>
+            <p>&ldquo;{review.quote}&rdquo;</p>
+            <strong>{review.name}</strong>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-shell glass-panel final-band" data-reveal>
+        <div>
+          <p class="eyebrow">Plan the stop</p>
+          <h2>{business.fullAddress}</h2>
+          <p>
+            Open late in Pompano Beach with wheelchair accessible entrance, parking, restroom, and
+            seating.
+          </p>
+        </div>
+
+        <div class="final-band-side">
+          <div class="final-band-meta">
+            <div>
+              <span>Call</span>
+              <strong>{business.phone}</strong>
+            </div>
+            <div>
+              <span>Hours</span>
+              <strong>Mon-Sat 7 AM to 1 AM</strong>
+            </div>
+            <div>
+              <span>Sunday</span>
+              <strong>9 AM to 1 AM</strong>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            {accessibility.map((item) => (
+              <span class="pill">{item}</span>
+            ))}
+          </div>
+
+          <div class="action-row">
+            <a class="button-primary" href="/visit/">
+              Plan Visit
+            </a>
+            <a class="button-secondary" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+              Open Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <Footer />
 </Layout>

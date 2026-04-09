@@ -1,0 +1,171 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Layout from '../layouts/Layout.astro';
+import {
+  accessibility,
+  business,
+  faqs,
+  hours,
+  visitBentoCards,
+  visitLinks,
+  visitSummaryCards,
+} from '../data/site';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://chillerskavacoffee.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Visit',
+        item: 'https://chillerskavacoffee.com/visit/',
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `Visit ${business.name}`,
+    url: 'https://chillerskavacoffee.com/visit/',
+    description:
+      'Verified hours, directions, phone number, and accessibility information for Chillers Kava and Coffee in Pompano Beach, Florida.',
+    primaryImageOfPage: 'https://chillerskavacoffee.com/chillers/google-photo.jpg',
+  },
+];
+---
+
+<Layout
+  title={`Visit ${business.name} | Pompano Beach, FL`}
+  description="Verified hours, directions, phone number, and accessibility information for Chillers Kava and Coffee at 230 S Cypress Rd suite b in Pompano Beach, Florida."
+  image="/chillers/google-photo.jpg"
+  structuredData={structuredData}
+>
+  <main class="site-main page-main">
+    <section class="page-shell">
+      <div class="container-shell page-top">
+        <div class="glass-panel page-title-panel" data-reveal>
+          <Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/visit/', label: 'Visit' }]} />
+          <p class="eyebrow">Visit</p>
+          <h1>Visit Chillers with verified hours, directions, and local details.</h1>
+          <p>
+            This page answers the local intent questions first: where it is, when it closes, how to
+            call, and whether the business information is current.
+          </p>
+
+          <div class="action-row">
+            <a class="button-primary" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+              Open Google Maps
+            </a>
+            <a class="button-secondary" href={business.phoneHref}>
+              Call {business.phone}
+            </a>
+          </div>
+        </div>
+
+        <aside class="glass-panel page-side-panel" data-reveal>
+          <p class="eyebrow">Quick summary</p>
+
+          <div class="compact-meta compact-meta-stack">
+            {visitSummaryCards.map((item) => (
+              <div>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+
+          <p class="page-note">Verified against the Google business listing on {business.verifiedDate}.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container-shell bento-grid visit-overview-grid" data-reveal>
+        {visitBentoCards.map((card) => (
+          <article class="glass-panel bento-card">
+            <p class="eyebrow">{card.eyebrow}</p>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
+        ))}
+
+        <article class="glass-panel bento-card visit-links-card">
+          <p class="eyebrow">Direct actions</p>
+          <h3>Maps, phone, and social links in one place.</h3>
+          <div class="link-pill-grid">
+            {visitLinks.map((link) => (
+              <a
+                class="link-pill"
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-shell bento-grid visit-detail-grid" data-reveal>
+        <article class="glass-panel detail-card hours-card">
+          <p class="eyebrow">Hours</p>
+          <h3>Cross-checked against the live listing.</h3>
+          <div class="hours-list">
+            {hours.map((entry) => (
+              <div class="hours-item">
+                <span>{entry.day}</span>
+                <strong>{entry.value}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article class="glass-panel detail-card access-card">
+          <p class="eyebrow">Accessibility</p>
+          <h3>Easy to scan before someone heads over.</h3>
+          <div class="pill-row">
+            {accessibility.map((item) => (
+              <span class="pill">{item}</span>
+            ))}
+          </div>
+        </article>
+
+        <article class="glass-panel detail-card faq-card">
+          <p class="eyebrow">FAQ</p>
+          <h3>Short answers to the local questions that come up most.</h3>
+          <div class="faq-grid">
+            {faqs.map((item) => (
+              <article class="faq-item">
+                <strong>{item.question}</strong>
+                <p>{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>
