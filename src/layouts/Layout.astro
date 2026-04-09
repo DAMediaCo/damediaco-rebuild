@@ -149,7 +149,6 @@ const schemaNodes = [websiteSchema, organizationSchema, localBusinessSchema, ...
       const body = document.body;
       const toggle = document.querySelector('[data-nav-toggle]');
       const closeButtons = document.querySelectorAll('[data-nav-close]');
-      const revealTargets = document.querySelectorAll('[data-reveal]');
 
       const closeNav = () => {
         body.dataset.navOpen = 'false';
@@ -162,19 +161,6 @@ const schemaNodes = [websiteSchema, organizationSchema, localBusinessSchema, ...
       closeButtons.forEach((button) => {
         button.addEventListener('click', closeNav);
       });
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-            }
-          });
-        },
-        { threshold: 0.18 }
-      );
-
-      revealTargets.forEach((node) => observer.observe(node));
     };
 
     if (document.readyState === 'loading') {
